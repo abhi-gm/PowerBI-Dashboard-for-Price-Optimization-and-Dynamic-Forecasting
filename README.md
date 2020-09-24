@@ -56,3 +56,28 @@ A demand forecasting model is built on the features mentioned above. The model's
 During price optimization, each product's price is constrained to a feasible range bounded by the wholesale cost and manufacturer's suggested retail price (MSRP)/original price. Companies may elect to tailor these constraints to their own business rules to reflect the differentiated pricing strategies they prefer for specific brands, departments, or stores.
 
 An experiment is employed to evaluate the effect of price optimization strategy on profit. Stores are paired based on similarity and then divided into "treatment" and "control" groups. Stores in the treatment group accept the prices recommended by the optimization algorithm, whereas stores in the control group use the company's previous pricing strategy (which, in this demo scenario, is a randomized pricing strategy). The profit gain of the optimization approach can be estimated from the difference in profit between the treatment and control groups.
+
+
+
+## **Next Purchase date**
+
+By predicting the next purchase date we can build out a strategy on top of this date to plan our next promotion move For a particular customer.
+
+Like customers who will purchase within the next few days can be taken out of any promotional activities as they will be buying our product anyway, instead we can target the customers who will be buying our product in the next 30 days for way beyond that.
+
+We have classified people in the class range of 0-20 days, customers who will buy our product in next 21-49 days and customers who will buy our product after 50 days.
+
+We can target the group of customers who are in the 21-49 days category with a new promotional offer so that they can be converted way before their predicted buying date and target customers that are in category class after 50 days can be targeted in order to stop the customer churn.
+
+## **Steps :**
+
+1.  We segmented our customers in two groups: 6 months purchase behavior and a group with purchase behavior after 6 months. We are creating a cutoff date in our data.
+2.  We create a data frame between the last purchase date in a 6 month group and the next purchase date after that.
+3.  We take out RFM scores days between last their purchases and mean & standard deviation of the between the purchase in days.
+4.  Using the shift function we will take out the last 3 dates of purchase and then the difference of days between these dates of purchase.
+5.  We kept the customers that are having >3 purchases.
+6.  We categorized out customers in three classes
+> 1.  0–20: Customers that will purchase in 0–20 days — Class name: 2
+> 2. 21–49: Customers that will purchase in 21–49 days — Class name: 1
+>3. ≥ 50: Customers that will purchase in more than 50 days — Class name: 0
+7.  Then used the xib classifier model we used it to predict the next purchase date class.
