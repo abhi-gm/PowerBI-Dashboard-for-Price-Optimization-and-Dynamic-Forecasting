@@ -1,0 +1,35 @@
+  <html>
+    <head>
+    <style>
+        .center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid black;
+  padding: 10px;
+  
+}
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+    </style>
+        <title> Customer Segment Prediction </title>
+    </head>
+    <body>
+        <div class="center">
+    <H1>Enter Valid Customer ID</H1>
+    <form method="POST" action="/cs">
+    <input type ="text" name="cus" placeholder="Customer ID" type="text">
+    <input type="submit" value="Predict">
+    </form>
+    
+    {%if seg_ment %}
+        <h1> Customer is   : <i> {{seg_ment}}</i>  class</h1>
+    {% endif %}
+    </div>
+    </body>
+    
+    
+    </html>

@@ -1,0 +1,342 @@
+<html dir="ltr"><head><style data-merge-styles="true"></style><style data-merge-styles="true"></style><style data-merge-styles="true"></style><style data-merge-styles="true"></style><title>Interpret Dashboard</title>
+
+  <style id="plotly.js-style-global"></style><style type="text/css">.GridChart {
+    height: 100%;
+    width: 100%; }
+  
+  .centered {
+    text-align: center; }
+  
+  .hidden {
+    display: none; }
+  
+  .visible-to-only-screen-reader {
+    border: 0;
+    clip: rect(0 0 0 0);
+    display: block;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
+  
+  .LoadingScreen {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%); }
+  </style><style type="text/css">.tile {
+    background-color: whitesmoke;
+    margin: 15px;
+    width: 200px;
+    min-height: 120px;
+    box-sizing: border-box;
+    box-shadow: 0 0 15px -2px #ccc;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .tile .tile-label {
+      font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      overflow-wrap: break-word;
+      font-size: 20px;
+      padding: 3px 4px 15px 4px; }
+    .tile.edited {
+      border: 2px solid #0078D4;
+      padding: 3px;
+      border-radius: 5px; }
+    .tile.error {
+      border: 2px solid #A80000;
+      padding: 3px;
+      border-radius: 5px; }
+  </style><style type="text/css">.explanation-spinner {
+    margin: auto;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    padding: 40px; }
+  </style><style type="text/css">.centered {
+    margin: auto;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    padding: 40px; }
+    .centered .primary-message {
+      font-size: 20px; }
+    .centered .secondary-message {
+      font-size: 16px; }
+  </style><style type="text/css">.prediction-area {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 20px; }
+    .prediction-area .prediction-label, .prediction-area .probability-label {
+      margin: auto;
+      padding: 5px;
+      font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+  </style><style type="text/css">.feature-bar-explanation-chart {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%; }
+    .feature-bar-explanation-chart .top-controls {
+      display: flex;
+      padding: 3px 15px; }
+      .feature-bar-explanation-chart .top-controls .slider-control {
+        flex: 1;
+        padding: 0 4px; }
+        .feature-bar-explanation-chart .top-controls .slider-control .slider-label {
+          display: flex;
+          flex-direction: row; }
+          .feature-bar-explanation-chart .top-controls .slider-control .slider-label .label-text {
+            line-height: 14px;
+            margin: 7px 0 0 4px;
+            font-size: 14px;
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+      .feature-bar-explanation-chart .top-controls .feature-slider {
+        flex: 1; }
+    .feature-bar-explanation-chart .feature-importance-bar-chart {
+      width: 100%;
+      flex: 1; }
+  </style><style type="text/css">.aggregate-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; }
+    .aggregate-chart .top-controls {
+      display: flex;
+      padding: 3px 15px; }
+      .aggregate-chart .top-controls .feature-slider {
+        flex: 1; }
+      .aggregate-chart .top-controls .path-selector {
+        margin: 0 5px 0 0; }
+      .aggregate-chart .top-controls .selector-label {
+        display: flex;
+        flex-direction: row; }
+        .aggregate-chart .top-controls .selector-label span {
+          padding-top: 5px;
+          font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+      .aggregate-chart .top-controls .slider-control {
+        flex: 1;
+        padding: 0 4px; }
+        .aggregate-chart .top-controls .slider-control .slider-label {
+          display: flex;
+          flex-direction: row; }
+          .aggregate-chart .top-controls .slider-control .slider-label .label-text {
+            line-height: 14px;
+            margin: 7px 0 0 4px;
+            font-size: 14px;
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+  
+  .callout-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    padding: 30px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+    .callout-info button {
+      max-width: 100px; }
+  </style><style type="text/css">.aggregate-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; }
+    .aggregate-chart .top-controls {
+      display: flex;
+      padding: 3px 15px; }
+      .aggregate-chart .top-controls .feature-slider {
+        flex: 1; }
+      .aggregate-chart .top-controls .path-selector {
+        margin: 0 5px 0 0; }
+      .aggregate-chart .top-controls .selector-label {
+        display: flex;
+        flex-direction: row; }
+        .aggregate-chart .top-controls .selector-label span {
+          padding-top: 5px;
+          font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+      .aggregate-chart .top-controls .slider-control {
+        flex: 1;
+        padding: 0 4px; }
+        .aggregate-chart .top-controls .slider-control .slider-label {
+          display: flex;
+          flex-direction: row; }
+          .aggregate-chart .top-controls .slider-control .slider-label .label-text {
+            line-height: 14px;
+            margin: 7px 0 0 4px;
+            font-size: 14px;
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+  
+  .callout-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    padding: 30px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+    .callout-info button {
+      max-width: 100px; }
+  </style><style type="text/css">.ICE-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1; }
+    .ICE-wrapper .unavailable, .ICE-wrapper .charting-prompt, .ICE-wrapper .loading {
+      margin: auto;
+      font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      padding: 40px;
+      font-size: 25px; }
+    .ICE-wrapper .feature-picker {
+      display: flex;
+      padding: 3px 15px;
+      justify-content: space-between;
+      border-bottom: 1px solid grey; }
+    .ICE-wrapper .rangeview {
+      display: flex;
+      justify-content: flex-end; }
+      .ICE-wrapper .rangeview .parameter-set {
+        display: flex; }
+    .ICE-wrapper .second-wrapper {
+      width: 100%;
+      flex: 1; }
+    .ICE-wrapper .chart-wrapper {
+      height: 100%; }
+  </style><style type="text/css">.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; }
+    .flex-wrapper .loading-message {
+      display: flex;
+      font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 20px;
+      border-bottom: 1px solid;
+      padding: 5px 10px; }
+    .flex-wrapper .label-group {
+      display: flex;
+      font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 20px;
+      border-bottom: 1px solid; }
+      .flex-wrapper .label-group .label-group-label {
+        width: 150px;
+        align-self: center;
+        padding-left: 10px; }
+      .flex-wrapper .label-group .flex-full {
+        flex: 1; }
+    .flex-wrapper .tile-scroller {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap; }
+  </style><style type="text/css">.explanation-chart {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+    .explanation-chart .top-controls {
+      display: flex;
+      padding: 3px 15px;
+      justify-content: space-between; }
+      .explanation-chart .top-controls .selector {
+        display: flex; }
+        .explanation-chart .top-controls .selector .selector-label {
+          display: flex;
+          flex-direction: row; }
+          .explanation-chart .top-controls .selector .selector-label .label-text {
+            max-width: 84px;
+            line-height: 14px;
+            margin-right: -16px;
+            font-size: 14px;
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+        .explanation-chart .top-controls .selector .ms-ComboBox-container {
+          max-width: 208px; }
+  
+  .callout-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    padding: 30px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; }
+    .callout-info button {
+      max-width: 100px; }
+  </style><style type="text/css">.feature-bar-explanation-chart {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%; }
+    .feature-bar-explanation-chart .top-controls {
+      display: flex;
+      padding: 3px 15px; }
+      .feature-bar-explanation-chart .top-controls .feature-slider {
+        flex: 1; }
+    .feature-bar-explanation-chart .feature-importance-bar-chart {
+      width: 100%;
+      flex: 1; }
+  </style><style type="text/css">.explainerDashboard {
+    width: 100%;
+    height: 100%; }
+    .explainerDashboard .charts-wrapper {
+      flex-grow: 1;
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      flex-direction: column; }
+      .explainerDashboard .charts-wrapper .global-charts-wrapper {
+        width: 100%;
+        height: 55vh;
+        display: flex;
+        flex-direction: row; }
+        .explainerDashboard .charts-wrapper .global-charts-wrapper .ms-FocusZone {
+          height: 100%; }
+        .explainerDashboard .charts-wrapper .global-charts-wrapper .chart {
+          flex: 1;
+          height: 100%; }
+      .explainerDashboard .charts-wrapper .local-charts-wrapper {
+        width: 100%;
+        border-top: 2px solid;
+        box-sizing: border-box; }
+        .explainerDashboard .charts-wrapper .local-charts-wrapper .local-placeholder {
+          height: 100px;
+          display: flex;
+          align-items: center;
+          font-size: 25px; }
+          .explainerDashboard .charts-wrapper .local-charts-wrapper .local-placeholder .placeholder-text {
+            margin: auto;
+            font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+            padding: 40px;
+            line-height: 35px; }
+        .explainerDashboard .charts-wrapper .local-charts-wrapper .tabbed-viewer {
+          display: flex;
+          flex-direction: row;
+          height: 55vh; }
+          .explainerDashboard .charts-wrapper .local-charts-wrapper .tabbed-viewer .ms-FocusZone {
+            height: 100%; }
+          .explainerDashboard .charts-wrapper .local-charts-wrapper .tabbed-viewer .view-panel {
+            display: flex;
+            flex-direction: column;
+            width: 100%; }
+            .explainerDashboard .charts-wrapper .local-charts-wrapper .tabbed-viewer .view-panel .local-commands {
+              display: flex;
+              width: 100%;
+              flex-direction: row;
+              border-bottom: 1px solid; }
+              .explainerDashboard .charts-wrapper .local-charts-wrapper .tabbed-viewer .view-panel .local-commands .clear-buton {
+                flex: 1; }
+            .explainerDashboard .charts-wrapper .local-charts-wrapper .tabbed-viewer .view-panel .local-summary {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              flex: 1; }
+              .explainerDashboard .charts-wrapper .local-charts-wrapper .tabbed-viewer .view-panel .local-summary .local-chart-wrapper {
+                flex: 1;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                border-top: 1px solid; }
+  </style></head><body class="ms-Fabric--isFocusHidden"><div style="height: 100%;" id="app_123"><div class="explainerDashboard"><div class="charts-wrapper"><div class="global-charts-wrapper"><div role="toolbar"><div class="ms-FocusZone css-48" data-focuszone-id="FocusZone1"><div class="ms-Pivot ms-Pivot--tabs root-41" role="tablist"><button type="button" id="Pivot0-Tab0" class="ms-Button ms-Button--action ms-Button--command ms-Pivot-link is-selected linkIsSelected-49" role="tab" aria-selected="true" name="Data Exploration" data-content="Data Exploration" data-is-focusable="true" tabindex="0"><span class="ms-Button-flexContainer flexContainer-50" data-automationid="splitbuttonprimary"><span class="ms-Pivot-linkContent linkContent-44"><span class="ms-Pivot-text text-45"> Data Exploration</span></span></span></button><button type="button" id="Pivot0-Tab1" class="ms-Button ms-Button--action ms-Button--command ms-Pivot-link link-57" role="tab" aria-selected="false" name="Global Importance" data-content="Global Importance" data-is-focusable="true" tabindex="-1"><span class="ms-Button-flexContainer flexContainer-50" data-automationid="splitbuttonprimary"><span class="ms-Pivot-linkContent linkContent-44"><span class="ms-Pivot-text text-45"> Global Importance</span></span></span></button><button type="button" id="Pivot0-Tab2" class="ms-Button ms-Button--action ms-Button--command ms-Pivot-link link-57" role="tab" aria-selected="false" name="Explanation Exploration" data-content="Explanation Exploration" data-is-focusable="true" tabindex="-1"><span class="ms-Button-flexContainer flexContainer-50" data-automationid="splitbuttonprimary"><span class="ms-Pivot-linkContent linkContent-44"><span class="ms-Pivot-text text-45"> Explanation Exploration</span></span></span></button><button type="button" id="Pivot0-Tab3" class="ms-Button ms-Button--action ms-Button--command ms-Pivot-link link-57" role="tab" aria-selected="false" name="Summary Importance" data-content="Summary Importance" data-is-focusable="true" tabindex="-1"><span class="ms-Button-flexContainer flexContainer-50" data-automationid="splitbuttonprimary"><span class="ms-Pivot-linkContent linkContent-44"><span class="ms-Pivot-text text-45"> Summary Importance</span></span></span></button></div></div></div><div class="explanation-chart"><div class="top-controls"><div class="path-selector x-value"><div class="ms-ComboBox-container css-58"><label id="ComboBox345-label" class="ms-Label root-69">X value:</label><div id="ComboBox345wrapper" class="ms-ComboBox css-60"><input autocapitalize="off" autocomplete="off" aria-autocomplete="both" data-is-interactable="true" id="ComboBox345-input" class="ms-ComboBox-Input css-61" type="text" aria-expanded="false" role="combobox" readonly="" aria-labelledby="ComboBox345-label" spellcheck="false" data-lpignore="true" value="Recency"><button type="button" class="ms-Button ms-Button--icon ms-ComboBox-CaretDown-button root-70" role="presentation" aria-hidden="true" data-is-focusable="false" tabindex="-1"><span class="ms-Button-flexContainer flexContainer-71" data-automationid="splitbuttonprimary"><i data-icon-name="ChevronDown" role="presentation" aria-hidden="true" class="ms-Icon root-32 css-75 ms-Button-icon icon-73" style="font-family: FabricMDL2Icons;"></i></span></button></div><div role="region" aria-live="polite" aria-atomic="true" id="ComboBox345-error" class=""></div></div></div><div class="path-selector"><div class="ms-ComboBox-container css-58"><label id="ComboBox349-label" class="ms-Label root-69">Color:</label><div id="ComboBox349wrapper" class="ms-ComboBox css-60"><input autocapitalize="off" autocomplete="off" aria-autocomplete="both" data-is-interactable="true" id="ComboBox349-input" class="ms-ComboBox-Input css-61" type="text" aria-expanded="false" role="combobox" readonly="" aria-labelledby="ComboBox349-label" spellcheck="false" data-lpignore="true" value="PredictedY"><button type="button" class="ms-Button ms-Button--icon ms-ComboBox-CaretDown-button root-70" role="presentation" aria-hidden="true" data-is-focusable="false" tabindex="-1"><span class="ms-Button-flexContainer flexContainer-71" data-automationid="splitbuttonprimary"><i data-icon-name="ChevronDown" role="presentation" aria-hidden="true" class="ms-Icon root-32 css-75 ms-Button-icon icon-73" style="font-family: FabricMDL2Icons;"></i></span></button></div><div role="region" aria-live="polite" aria-atomic="true" id="ComboBox349-error" class=""></div></div></div></div><div class="top-controls"><div class="path-selector y-value"><div class="ms-ComboBox-container css-58"><label id="ComboBox353-label" class="ms-Label root-69">Y value:</label><div id="ComboBox353wrapper" class="ms-ComboBox css-60"><input autocapitalize="off" autocomplete="off" aria-autocomplete="both" data-is-interactable="true" id="ComboBox353-input" class="ms-ComboBox-Input css-61" type="text" aria-expanded="false" role="combobox" readonly="" aria-labelledby="ComboBox353-label" spellcheck="false" data-lpignore="true" value="MonetaryValue"><button type="button" class="ms-Button ms-Button--icon ms-ComboBox-CaretDown-button root-70" role="presentation" aria-hidden="true" data-is-focusable="false" tabindex="-1"><span class="ms-Button-flexContainer flexContainer-71" data-automationid="splitbuttonprimary"><i data-icon-name="ChevronDown" role="presentation" aria-hidden="true" class="ms-Icon root-32 css-75 ms-Button-icon icon-73" style="font-family: FabricMDL2Icons;"></i></span></button></div><div role="region" aria-live="polite" aria-atomic="true" id="ComboBox353-error" class=""></div></div></div></div><div class="GridChart js-plotly-plot" id="37c28fba-e55a-45df-9a2b-6532d1a08ec6" aria-hidden="true"><div class="plot-container plotly"><div class="svg-container" style="position: relative; width: 100%; height: 100%;"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1340" height="10" style="background: rgb(255, 255, 255);"><defs id="defs-077301"><g class="clips"><clipPath id="clip077301xyplot" class="plotclip"><rect width="1156" height="1"></rect></clipPath><clipPath class="axesclip" id="clip077301x"><rect x="80" y="0" width="1156" height="10"></rect></clipPath><clipPath class="axesclip" id="clip077301y"><rect x="0" y="1" width="1340" height="1"></rect></clipPath><clipPath class="axesclip" id="clip077301xy"><rect x="80" y="1" width="1156" height="1"></rect></clipPath></g><g class="gradients"></g></defs><g class="bglayer"></g><g class="draglayer cursor-crosshair"><g class="xy"><rect class="nsewdrag drag" data-subplot="xy" x="80" y="1" width="1156" height="1" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="nwdrag drag cursor-nw-resize" data-subplot="xy" x="60" y="-19" width="20" height="20" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="nedrag drag cursor-ne-resize" data-subplot="xy" x="1236" y="-19" width="20" height="20" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="swdrag drag cursor-sw-resize" data-subplot="xy" x="60" y="2" width="20" height="20" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="sedrag drag cursor-se-resize" data-subplot="xy" x="1236" y="2" width="20" height="20" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="ewdrag drag cursor-ew-resize" data-subplot="xy" x="195.60000000000002" y="2.5" width="924.8000000000001" height="20" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="wdrag drag cursor-w-resize" data-subplot="xy" x="80" y="2.5" width="115.60000000000001" height="20" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="edrag drag cursor-e-resize" data-subplot="xy" x="1120.4" y="2.5" width="115.60000000000001" height="20" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="nsdrag drag cursor-ns-resize" data-subplot="xy" x="59.5" y="1.1" width="20" height="0.8" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="sdrag drag cursor-s-resize" data-subplot="xy" x="59.5" y="1.9" width="20" height="0.1" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect><rect class="ndrag drag cursor-n-resize" data-subplot="xy" x="59.5" y="1" width="20" height="0.1" style="fill: transparent; stroke-width: 0; pointer-events: all;"></rect></g></g><g class="layer-below"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="cartesianlayer"><g class="subplot xy"><g class="layer-subplot"><g class="shapelayer"></g><g class="imagelayer"></g></g><g class="gridlayer"><g class="x"><path class="xgrid crisp" transform="translate(332.24,0)" d="M0,1v1" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="xgrid crisp" transform="translate(530.87,0)" d="M0,1v1" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="xgrid crisp" transform="translate(729.51,0)" d="M0,1v1" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="xgrid crisp" transform="translate(928.14,0)" d="M0,1v1" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="xgrid crisp" transform="translate(1126.78,0)" d="M0,1v1" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path></g><g class="y"></g></g><g class="zerolinelayer"><path class="xzl zl crisp" transform="translate(133.6,0)" d="M0,1v1" style="stroke: rgb(68, 68, 68); stroke-opacity: 1; stroke-width: 1px;"></path></g><path class="xlines-below"></path><path class="ylines-below"></path><g class="overlines-below"></g><g class="xaxislayer-below"></g><g class="yaxislayer-below"></g><g class="overaxes-below"></g><g class="plot" transform="translate(80, 1)" clip-path="url('#clip077301xyplot')"></g><g class="overplot"></g><path class="xlines-above crisp" d="M0,0" style="fill: none;"></path><path class="ylines-above crisp" d="M0,0" style="fill: none;"></path><g class="overlines-above"></g><g class="xaxislayer-above"><g class="xtick"><text text-anchor="middle" x="0" y="13" data-unformatted="0" data-math="N" transform="translate(133.6,0)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">0</text></g><g class="xtick"><text text-anchor="middle" x="0" y="13" data-unformatted="50" data-math="N" transform="translate(332.24,0)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">50</text></g><g class="xtick"><text text-anchor="middle" x="0" y="13" data-unformatted="100" data-math="N" transform="translate(530.87,0)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">100</text></g><g class="xtick"><text text-anchor="middle" x="0" y="13" data-unformatted="150" data-math="N" transform="translate(729.51,0)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">150</text></g><g class="xtick"><text text-anchor="middle" x="0" y="13" data-unformatted="200" data-math="N" transform="translate(928.14,0)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">200</text></g><g class="xtick"><text text-anchor="middle" x="0" y="13" data-unformatted="250" data-math="N" transform="translate(1126.78,0)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">250</text></g></g><g class="yaxislayer-above"><g class="ytick"><text text-anchor="end" x="79" y="3.5" data-unformatted="500" data-math="N" transform="translate(0,1.83)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">500</text></g><g class="ytick"><text text-anchor="end" x="79" y="3.5" data-unformatted="1000" data-math="N" transform="translate(0,1.6099999999999999)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">1000</text></g><g class="ytick"><text text-anchor="end" x="79" y="3.5" data-unformatted="1500" data-math="N" transform="translate(0,1.4)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">1500</text></g><g class="ytick"><text text-anchor="end" x="79" y="3.5" data-unformatted="2000" data-math="N" transform="translate(0,1.18)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">2000</text></g></g><g class="overaxes-above"></g></g></g><g class="polarlayer"></g><g class="ternarylayer"></g><g class="geolayer"></g><g class="funnelarealayer"></g><g class="pielayer"></g><g class="treemaplayer"></g><g class="sunburstlayer"></g><g class="glimages"></g></svg><div class="gl-container"><canvas class="gl-canvas gl-canvas-context" width="1340" height="10" style="position: absolute; top: 0px; left: 0px; overflow: visible; pointer-events: none;"></canvas><canvas class="gl-canvas gl-canvas-focus" width="1340" height="10" style="position: absolute; top: 0px; left: 0px; overflow: visible; pointer-events: none;"></canvas><canvas class="gl-canvas gl-canvas-pick" width="1340" height="10" style="position: absolute; top: 0px; left: 0px; overflow: visible; pointer-events: none;"></canvas></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1340" height="10"><defs id="topdefs-077301"><g class="clips"></g><clipPath id="legend077301"><rect width="90" height="30" x="0" y="0"></rect></clipPath></defs><g class="indicatorlayer"></g><g class="layer-above"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="infolayer"><g class="legend" pointer-events="all" transform="translate(1259.1200000000001, 0)"><rect class="bg" shape-rendering="crispEdges" width="90" height="30" x="0" y="0" style="stroke: rgb(68, 68, 68); stroke-opacity: 1; fill: rgb(255, 255, 255); fill-opacity: 1; stroke-width: 0px;"></rect><g class="scrollbox" transform="translate(0, 0)" clip-path="url('#legend077301')"><g class="groups"><g class="traces" transform="translate(0, 14.5)" style="opacity: 1;"><text class="legendtext user-select-none" text-anchor="start" x="40" y="3.9" data-unformatted="Bronze" data-math="N" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">Bronze</text><g class="layers" style="opacity: 1;"><g class="legendfill"></g><g class="legendlines"></g><g class="legendsymbols"><g class="legendpoints"><path class="scatterpts" transform="translate(20,0)" d="M3,0A3,3 0 1,1 0,-3A3,3 0 0,1 3,0Z" style="opacity: 1; stroke-width: 0px; fill: rgb(31, 119, 180); fill-opacity: 1;"></path></g></g></g><rect class="legendtoggle" pointer-events="all" x="0" y="-9.5" width="74.734375" height="19" style="cursor: pointer; fill: rgb(0, 0, 0); fill-opacity: 0;"></rect></g><g class="traces" transform="translate(0, 33.5)" style="opacity: 1;"><text class="legendtext user-select-none" text-anchor="start" x="40" y="3.9" data-unformatted="Silver" data-math="N" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">Silver</text><g class="layers" style="opacity: 1;"><g class="legendfill"></g><g class="legendlines"></g><g class="legendsymbols"><g class="legendpoints"><path class="scatterpts" transform="translate(20,0)" d="M3,0A3,3 0 1,1 0,-3A3,3 0 0,1 3,0Z" style="opacity: 1; stroke-width: 0px; fill: rgb(255, 127, 14); fill-opacity: 1;"></path></g></g></g><rect class="legendtoggle" pointer-events="all" x="0" y="-9.5" width="74.734375" height="19" style="cursor: pointer; fill: rgb(0, 0, 0); fill-opacity: 0;"></rect></g><g class="traces" transform="translate(0, 52.5)" style="opacity: 1;"><text class="legendtext user-select-none" text-anchor="start" x="40" y="3.9" data-unformatted="Gold" data-math="N" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 10px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;">Gold</text><g class="layers" style="opacity: 1;"><g class="legendfill"></g><g class="legendlines"></g><g class="legendsymbols"><g class="legendpoints"><path class="scatterpts" transform="translate(20,0)" d="M3,0A3,3 0 1,1 0,-3A3,3 0 0,1 3,0Z" style="opacity: 1; stroke-width: 0px; fill: rgb(44, 160, 44); fill-opacity: 1;"></path></g></g></g><rect class="legendtoggle" pointer-events="all" x="0" y="-9.5" width="74.734375" height="19" style="cursor: pointer; fill: rgb(0, 0, 0); fill-opacity: 0;"></rect></g></g></g><rect class="scrollbar" rx="20" ry="3" width="6" height="20" x="80" y="4" style="fill: rgb(128, 139, 164); fill-opacity: 1;"></rect></g><g class="g-gtitle"></g><g class="g-xtitle" transform="translate(0,-40.5)"><text class="xtitle" x="658" y="48" text-anchor="middle" data-unformatted="Recency" data-math="N" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); opacity: 1; font-weight: normal; white-space: pre;">Recency</text></g><g class="g-ytitle"><text class="ytitle" transform="rotate(-90,46,1.5)" x="46" y="1.5" text-anchor="middle" data-unformatted="MonetaryValue" data-math="N" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); opacity: 1; font-weight: normal; white-space: pre;">MonetaryValue</text></g></g><g class="menulayer"></g><g class="zoomlayer"></g></svg><div class="modebar-container" style="position: absolute; top: 0px; right: 0px; width: 100%;"></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1340" height="10"><g class="hoverlayer"></g></svg></div></div></div><table class="plotly-table visible-to-only-screen-reader"><tbody><tr><td>262</td><td>77</td><td>134</td><td>68</td><td>195</td><td>217</td><td>87</td></tr><tr><td>633</td><td>258.5</td><td>557</td><td>250.8</td><td>108.4</td><td>381</td><td>230.4</td></tr><tr><td>80</td><td>17</td><td>44</td><td>49</td><td>54</td><td>8</td><td>94</td><td>47</td><td>25</td><td>5</td><td>17</td><td>96</td><td>54</td><td>10</td><td>30</td></tr><tr><td>441.1</td><td>352.5</td><td>740</td><td>583.6</td><td>632.7</td><td>155</td><td>456.3</td><td>652</td><td>772.1</td><td>329.5</td><td>806</td><td>2411</td><td>914.1</td><td>696.8</td><td>471.5</td></tr><tr><td>8</td><td>14</td><td>2</td><td>63</td><td>18</td><td>48</td><td>40</td><td>2</td></tr><tr><td>1759</td><td>679.4</td><td>1020</td><td>1073</td><td>1306</td><td>1106</td><td>1508</td><td>1228</td></tr></tbody></table></div></div><div class="local-charts-wrapper"><div class="local-placeholder"><div class="placeholder-text">Select a point to see&nbsp;its local explanation</div></div></div></div></div></div>
+  <script type="text/javascript">
+      let data = {"predictedY": [2, 1, 0, 2, 2, 2, 0, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 0, 0, 2], "trainingData": [[8.0, 7.0, 1759.3000000000002, 438.0, 12.0, 7.0, 1759.3000000000002, 251.32857142857145, 2420.211819432976, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], [80.0, 3.0, 441.1, 365.0, 6.0, 3.0, 441.1, 147.03333333333333, 606.8069309110928, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], [262.0, 2.0, 633.0, 212.0, 5.0, 2.0, 633.0, 316.5, 870.7975227085053, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [14.0, 4.0, 679.4, 373.0, 10.0, 4.0, 679.4, 169.85, 934.6284943572805, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0], [2.0, 5.0, 1020.2, 207.0, 11.0, 5.0, 1020.2, 204.04000000000002, 1403.4559757775942, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0], [63.0, 8.0, 1073.2, 374.0, 10.0, 8.0, 1073.2, 134.15, 1476.3663528764107, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], [77.0, 3.0, 258.5, 142.0, 5.0, 3.0, 258.5, 86.16666666666667, 355.6100467932838, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], [18.0, 3.0, 1306.2, 442.0, 10.0, 3.0, 1306.2, 435.40000000000003, 1796.896878612717, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0], [17.0, 2.0, 352.5, 409.0, 7.0, 2.0, 352.5, 176.25, 484.9227910817506, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], [44.0, 3.0, 740.0, 144.0, 8.0, 3.0, 740.0, 246.66666666666666, 1017.9939443985687, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [48.0, 6.0, 1106.3, 225.0, 11.0, 6.0, 1106.3, 184.38333333333333, 1521.9009468758602, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], [49.0, 4.0, 583.6, 376.0, 8.0, 4.0, 583.6, 145.9, 802.8395485824387, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0], [54.0, 3.0, 632.7, 171.0, 7.0, 3.0, 632.7, 210.9, 870.3848224607764, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [8.0, 1.0, 155.0, 0.0, 6.0, 1.0, 155.0, 155.0, 213.22846132672723, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], [94.0, 3.0, 456.3, 349.0, 5.0, 3.0, 456.3, 152.1, 627.7170767960363, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], [47.0, 3.0, 652.0, 143.0, 8.0, 3.0, 652.0, 217.33333333333334, 896.935205064685, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [25.0, 4.0, 772.1000000000001, 65.0, 10.0, 4.0, 772.1000000000001, 193.02500000000003, 1062.1528709055879, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0], [134.0, 2.0, 557.0, 79.0, 4.0, 2.0, 557.0, 278.5, 766.2467932837874, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], [68.0, 2.0, 250.8, 126.0, 4.0, 2.0, 250.8, 125.4, 345.01740710156895, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], [5.0, 2.0, 329.5, 245.0, 7.0, 2.0, 329.5, 164.75, 453.28243875584906, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], [17.0, 3.0, 806.0, 93.0, 9.0, 3.0, 806.0, 268.6666666666667, 1108.7879988989816, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [195.0, 1.0, 108.4, 0.0, 3.0, 1.0, 108.4, 108.4, 149.12235617946598, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], [96.0, 7.0, 2411.1, 163.0, 9.0, 7.0, 2411.1, 344.4428571428571, 3316.871890999174, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], [40.0, 4.0, 1507.6, 380.0, 10.0, 4.0, 1507.6, 376.9, 2073.956311588219, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0], [54.0, 4.0, 914.0999999999999, 374.0, 8.0, 4.0, 914.0999999999999, 228.52499999999998, 1257.4976548307184, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0], [10.0, 3.0, 696.8, 437.0, 9.0, 3.0, 696.8, 232.26666666666665, 958.565108725571, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0], [30.0, 4.0, 471.5, 484.0, 8.0, 4.0, 471.5, 117.875, 648.6272226809799, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0], [217.0, 2.0, 381.0, 206.0, 4.0, 2.0, 381.0, 190.5, 524.1293146160198, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], [87.0, 2.0, 230.4, 108.0, 4.0, 2.0, 230.4, 115.2, 316.95379025598675, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], [2.0, 4.0, 1228.3, 416.0, 11.0, 4.0, 1228.3, 307.075, 1689.732380952381, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]], "isClassifier": true, "localExplanations": {"scores": [[[-0.06741049031890506, 0.0, -0.06081064533803354, -0.03619768479475474, -0.003462606358720921, 0.0, -0.05030505232991894, -0.015809644332495376, -0.05586098784913479, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.002519752700539113, 0.0, -0.0011598744885840395, -0.002710679643453673], [-0.05692722169610426, 0.0, -0.03614064983448634, -0.024621511261787854, -0.002746629448268506, 0.0, -0.020870110346204798, -0.12058661688433533, -0.030994664019382306, 0.0, 0.0, -0.0033281593231471174, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.21235151382617123, 0.0, 0.07630733756492647, 0.029464787993166375, 0.0, 0.0, 0.06755496803884531, 0.12837203087983717, 0.08494208463433703, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.008940708297944466, 0.0, 0.00828806849209196], [-0.05026796598471833, 0.0, -0.059347983021039136, -0.01975851737142592, -0.0008895375821836027, 0.0, -0.06253950709538775, -0.02994185276785491, -0.06305238744224431, -0.0017159221822344028, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0009184733091386343, 0.0, -0.0049004535433450624, 0.0, -0.00292448796680822, 0.0], [-0.06476744481611724, 0.0, -0.06943559831966697, 0.0, 0.0, 0.0, -0.06509454932720615, -0.025217709218486317, -0.06854442659263071, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0030614253763128207], [0.0, 0.0, -0.08184287086803396, -0.019286617717849674, -0.0014989147529246294, 0.0, -0.08266357019019838, -0.02055767770534439, -0.0787245122491545, 0.0, 0.0, -0.001563330685685399, 0.0, 0.0, 0.0, -0.0017057558121142402, -0.002777964617169726, 0.0, 0.0, 0.0, 0.0], [0.04552695370438525, 0.0, 0.16787414554726404, 0.0, 0.0, 0.0, 0.1756509435642865, 0.14618237553847213, 0.16063061852176047, 0.0, 0.0, 0.0, 0.0, 0.0, 0.007845493338518472, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.03821114533245759, 0.0, -0.060771703280283335, -0.037298930800396674, -0.0030445613820141437, 0.0, -0.05531503303302149, -0.03974805864705103, -0.056628211535341255, -0.0016371738518597412, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0016574797663497925, 0.0, -0.0019107813419785291, 0.0, 0.0, 0.0], [-0.24872518694623752, 0.0, 0.0, -0.03704483685602958, 0.0, 0.0, 0.0, 0.0, 0.0, -0.010461508612589376, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.0033088269823475236, 0.0, -0.08218920670397617, -0.013577334458130655, 0.0, 0.0, -0.08032192503858293, -0.034244128915958016, -0.078713512738255, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, -0.07385326934896153, 0.0, 0.0, 0.0, -0.08297826528179197, -0.05869729516589059, -0.08050093058475785, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, -0.0026098969369274944, -0.08135627245796118, -0.01925543006898925, 0.0, -0.003477117716554151, -0.0773374017363054, -0.03577242491625551, -0.07220675928194872, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0011455818360106562, 0.0, 0.0, 0.0], [0.00029815974338592843, 0.0, -0.08281265235273141, -0.0018488989650701781, 0.0, 0.0, -0.08254646860364387, -0.034359705378638944, -0.08313389412467662, 0.0, 0.0, 0.0, 0.0, -0.0009093604397792665, -0.0029082316500831373, -0.004517877238287948, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.26555006879060783, -0.0092287001289868, -0.019398849750077662, 0.039852356185644755, 0.017054405645042625, 0.0, -0.02378673522985031, -0.018281371009526204, -0.010830816976811236, 0.006849492776469096, 0.0, 0.0, 0.0, -0.004361844150588379, 0.0, -0.007301865739561958, 0.0, -0.020505262548830255, 0.0, 0.0, 0.019261460841190348], [0.012775263523272101, 0.0, -0.01638376412197072, -0.03732526327264804, 0.0, -0.002865257478168931, -0.01694182979929608, -0.1246671664624883, -0.03116908217811326, 0.0, 0.0, 0.0, -0.004988277378820988, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.005850276315260694, -0.001688227376847956, -0.08078353133415822, -0.0046650369288873395, 0.0, 0.0, -0.07930417653876409, -0.03460588342496851, -0.08667266708912899, 0.0, 0.0, 0.0, 0.0, 0.0, 0.008926328027508729, -0.004005570146134424, 0.0, -0.0037333726390180177, 0.0, 0.0, 0.0], [-0.00876298672311511, 0.0, -0.07627366089199152, 0.0, -0.0022339437030285403, 0.0, -0.07406046408348393, -0.05268160454532975, -0.07594765193702599, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0013148267921171408, 0.0, 0.0], [0.06749094419152973, 0.0, 0.18359429257655113, 0.015142474099746839, 0.0, 0.0, 0.18615283193576904, 0.048941595406615857, 0.19232009561807062, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.010639488000353858, 0.005545029298478499, 0.19137737526728804, 0.0, 0.0, 0.0, 0.17841185633562606, 0.14645313843328883, 0.1711757179421819, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.28878739370734596, 0.0, 0.0164355134162954, 0.0, -0.00896035107762383, 0.0, 0.0, -0.009146436537161351, 0.0, 0.0, 0.0, 0.0, 0.0, -0.005760878819514759, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.04915510440000134, 0.0, -0.06307257461157421, 0.0, 0.0, 0.0, -0.06453093491905904, -0.027424041691710394, -0.07185630061831143, 0.0, 0.0, 0.0, 0.0, 0.0, -0.004130034461605023, -0.0030226960643319756, 0.0, 0.0, 0.0, 0.0, 0.0], [0.018554181617830845, 0.0, 0.11862364608960962, 0.2019629299115625, 0.0, 0.0, 0.12055605140179859, 0.10542258726285036, 0.1285833574610209, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.007224211432658056], [0.012388558032494008, 0.0, -0.054810322004860294, -0.00788363506555849, 0.0, -0.0023651288804260318, -0.056372546233317986, -0.05937014249034686, -0.05693661385987139, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, -0.001804559225973848, -0.07076466988031122, -0.026558694564823127, 0.0, 0.0, -0.06697614898542062, -0.057257605758322755, -0.07173011983323893, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.0027989368695500866, 0.0, -0.0825716022858018, -0.013535446746103214, 0.0, 0.0, -0.08540034101367688, -0.030746013655568255, -0.07819584998122017, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.06563869095268501, 0.0, -0.062375877771483984, -0.03537371336239392, 0.0, 0.0, -0.05292819039858959, -0.01152195897489823, -0.05963791418160931, -0.0005733236817077603, 0.0, 0.0, 0.0, 0.0, -0.0020603582917565755, -0.0021268237105457194, 0.0, 0.0, 0.0, -0.0010660095403861036, 0.0], [-0.0204136021790335, 0.0, -0.05896724425086311, -0.04768513609703573, -0.0026075792916308016, 0.0, -0.058847764299738536, -0.03218344654494351, -0.05817311311967921, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0023145894003440137, 0.0, 0.0, 0.0, 0.0], [0.020929659537853196, 0.0, 0.189235812794875, 0.06446291098327966, 0.0, 0.0, 0.1928222928461747, 0.04431337170751115, 0.1895313501452477, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.00946976357560364, 0.0, 0.17309813587531747, 0.0, 0.0, 0.0, 0.17571338048932555, 0.16449420508549184, 0.17974419295383837, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.04778961863140707, -0.0019335953000179096, -0.055535686004938356, -0.032911622577935895, 0.0, 0.0, -0.05373020626320171, -0.046411827788181675, -0.05512083138650159, -0.0017276915057601316, 0.0, 0.0, 0.0, -0.0010198714251546392, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]], [[-0.08877416425232831, 0.0, -0.14476929465991156, -0.02148803337987093, -0.004410281410380801, 0.0, -0.1275947479092318, -0.06350716189796801, -0.13566560968495067, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.00524413844057281, 0.0, 0.0, -0.0039761169966411325], [0.07467309607695799, 0.0, 0.06957892965742296, 0.015588652268277992, 0.004369899807114663, 0.0, 0.05586623983320124, 0.11108920259488428, 0.0631783679496058, 0.0, 0.0, 0.0032459617733074375, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.2269947567470959, 0.0, -0.042050888574621414, -0.02507600415483635, 0.0, 0.0, -0.03333222271782493, -0.13036751402260632, -0.0486705866332513, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.007820599511225157, 0.0, -0.008122280204075571], [-0.25508622269640735, 0.0, -0.06666941056894521, 0.0, 0.0, 0.0, -0.0664822838075958, -0.12142800361437034, -0.07655631527949419, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.006460341610831977, 0.0, -0.006445787812897397, 0.0], [-0.15008904350320673, 0.0, -0.13240904511023543, -0.019200734232478534, 0.0, 0.0, -0.12462139734288591, -0.01761496391823092, -0.13115687975996534, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.003189558565009021, 0.0, 0.0, 0.0, 0.0, -0.006404333279159791], [-0.025749301703696714, 0.0, -0.11673850939680719, 0.02322136830109567, 0.0, 0.0, -0.11948466369511057, -0.16084224535944988, -0.1126611001274141, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0062299772311456, 0.0, 0.0, 0.0, 0.0], [-0.02513920213751053, 0.0, -0.14730591132997373, 0.0, 0.0, 0.0, -0.15282874176505906, -0.12811437860729313, -0.13961619217755689, 0.0, 0.0, 0.0, 0.0, 0.0, -0.006092207753193191, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.1884324080636114, 0.0, -0.14134129485068225, -0.019033561251716236, 0.0, 0.0, -0.13040135098041467, 0.030750220688848612, -0.12452152871235717, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.008822591812559122, -0.00923807423512768, 0.0, 0.0], [0.19103329293645308, 0.0, 0.05560731872438818, 0.021826243335972217, 0.0, 0.0, 0.058491956551560476, 0.0, 0.05812379648860583, 0.010780881398742476, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.002441827269450414, 0.0, 0.0, 0.0], [-0.022972645758087662, 0.0, 0.12988117144926403, 0.015587903954141502, 0.0, 0.0, 0.1222845676866636, 0.021907394280179668, 0.12202765327447013, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.0821908582374895, 0.0, -0.12480579359002214, 0.0, 0.0, 0.0, -0.1388351625768232, -0.09635994863581879, -0.13662100441106706, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.12262067150317227, 0.023741568530402463, 0.0, 0.003354942377398362, 0.11770533797167809, 0.018919274463836844, 0.11139704736136058, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.11571522367960874, 0.004300720383453194, 0.0, 0.0, 0.1122092077431317, 0.034407426936736235, 0.11784947273052354, 0.0, 0.0, 0.0, 0.0, 0.002822395817351442, 0.0013810061732359435, 0.0010683894262301097, 0.0, 0.0, 0.0, 0.0, 0.0], [0.2082912390056661, 0.007089416734030046, 0.049507618447612256, 0.03179650162596334, 0.0, 0.0, 0.049881230021792955, 0.013737935985847466, 0.03820657664033017, 0.0, 0.0, 0.0, 0.0, 0.003597635103066099, 0.0, 0.0, 0.0, 0.013410249551707498, 0.0, 0.0, -0.017396957391999646], [0.008223410766467903, 0.0, 0.050465241309800624, 0.030115215578114807, 0.0012359125739750954, 0.0017266897150006455, 0.05143822216400923, 0.10983200753982358, 0.06516476813780345, 0.0, 0.0, 0.0, 0.0029017588648390102, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.01537443964769658, 0.0, 0.11865209201051335, 0.0, 0.0, 0.0, 0.11944447219520807, 0.034920632949535735, 0.12524842233134834, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.005587992715289536, 0.0, 0.0, 0.0], [-0.09209867060784116, 0.0, 0.07089873421925497, 0.07415108364934922, 0.0038650747204072855, 0.0, 0.06835691019147061, 0.06256096646807348, 0.07480947697801602, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.004225649020819844, 0.002536489562447619, 0.0], [-0.05049039002251959, 0.0, -0.14967484487336485, -0.011809960536560637, 0.0, 0.0, -0.1513649073940127, -0.06715780307191074, -0.15683611284437493, 0.0, 0.0, 0.0, -0.0029223054218815436, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, -0.004625646936338074, -0.16844546529661092, 0.0, 0.0, 0.0, -0.15761741757164027, -0.11744385816581226, -0.15086806664809194, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.219654303312609, 0.0, 0.04226719892269937, 0.0, 0.005747640926843572, 0.0, 0.054747483621147175, 0.006374108056786232, 0.061727341721193874, 0.0, 0.0, 0.0, 0.0, 0.0026376806090390448, 0.0, 0.0, 0.0, 0.001506557711303591, 0.0, 0.0, 0.003144542247244253], [-0.04154268108994284, 0.0, 0.09031513091827864, 0.0, 0.0, 0.0, 0.0793687828507395, 0.13000710827831158, 0.07988086772616437, 0.0, 0.0, 0.0, 0.0, 0.0, 0.007045113084635596, 0.0, 0.003891785583549967, 0.0, 0.0, 0.0, 0.0], [-0.018638917499685936, 0.0, -0.11015630311623864, -0.15510057133201738, 0.0, 0.0, -0.11096690272905918, -0.07771578916528682, -0.11829495232867546, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.005781052025666145], [0.006765418423263784, 0.0, 0.0, 0.022299156384045386, 0.0, 0.0, 0.0, 0.020780022505745736, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.16495504859643603, 0.0, -0.07402001888848547, -0.005950110923756358, 0.0, -0.005643505326770687, -0.08149928753174099, 0.062096488731192195, -0.08215524503721, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.006104015063231216, 0.0, 0.0, 0.0, 0.0], [0.00435511911377108, 0.0, 0.11890202897992888, 0.014524402821522842, 0.0, 0.0, 0.12311705716483054, 0.022446643314200543, 0.11274188339894908, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0955451308058175, 0.021403269121585633, 0.0, 0.0, 0.09076940977569531, 0.08375548560168317, 0.09816891673686351, 0.0, 0.0, 0.0, 0.0, 0.0, 0.002463346561328905, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.013453245750089382, 0.0, 0.09329272489145565, 0.006849296347445244, 0.0028436624836527258, 0.0, 0.08953625421271055, 0.03452587031045537, 0.09033483277263271, 0.0, 0.0018696388506364015, 0.0, 0.0, 0.0, 0.0, 0.0, 0.002046603299694527, 0.0, 0.001505111254497149, 0.0, 0.0], [-0.014805639645956659, 0.0, -0.15487052046746708, -0.05883841475896151, 0.0, 0.0, -0.15728568257124503, -0.05612844459206451, -0.15504936565882566, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, -0.1558107570835889, 0.0, 0.0, 0.0, -0.15812249266220246, -0.11920055506732846, -0.1649049389813419, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.18332193953039858, 0.0, -0.13679905087803595, 0.0, 0.0, 0.0, -0.1359518284393234, 0.0, -0.13234854735605095, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]], [[0.15634171324328383, 0.0, 0.20567993340923507, 0.05778983266575233, 0.008038685503260312, 0.0, 0.17802926817971476, 0.07945359806832797, 0.1916369664987232, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.007913455776750289, 0.0, 0.0, 0.0067935134413484866], [-0.018033724562829243, 0.0, -0.03373969331917653, 0.008789881050484553, 0.0, 0.0, -0.03518680045011208, 0.00925630351744592, -0.03246075338286859, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.014846716123781238, 0.0, -0.034211355217377046, -0.004205332711368859, 0.0, 0.0, -0.03412562643848993, 0.0, -0.0360910489183286, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.30822984460474245, 0.0, 0.12986492620678886, 0.0, 0.0, 0.0, 0.13230570031236077, 0.15473333585128035, 0.1427036277534826, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01435312104244324, 0.0, 0.013194897885823953, 0.0], [0.21494100480324396, 0.0, 0.20192840107707044, 0.017286571985086985, 0.0, 0.0, 0.18978435330748056, 0.043055458161783855, 0.19981692096640008, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.004396629010699149, 0.0, 0.0, 0.0, 0.0, 0.00959777004982676], [0.02289079258877158, 0.0, 0.19921291118015666, 0.0, 0.0, 0.0, 0.20291812834679757, 0.18218844301682613, 0.1920538032740547, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.009841565404396402, 0.0, 0.0, 0.0, 0.0], [-0.02038775156687478, 0.0, -0.020568234217290385, 0.0, 0.0, 0.0, -0.022822201799227546, -0.018067996931178915, -0.021014426344203613, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0017532855853252816, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.2267394526665344, 0.0, 0.20231097670382225, 0.056552138974078014, 0.005919838437812186, 0.0, 0.18588139684620342, 0.009163047420258141, 0.1812104177202436, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.010845126992406084, 0.00864127242701529, 0.0, 0.0], [0.059357880126908305, 0.0, -0.06177480495467536, 0.018002335013821837, 0.0, 0.0, -0.06352691231951337, 0.010210846064527518, -0.06434312822138522, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.02584050043212671, 0.0, -0.04801582176089613, 0.0, 0.0, 0.0, -0.04234335142425265, 0.011883415482845227, -0.043725852779204266, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.08320890431364186, 0.0, 0.19841319066121543, 0.0, 0.0, 0.0, 0.22158875450945686, 0.1547777131968216, 0.21685396515148658, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.010574818464767946, 0.0, -0.04229723394069208, -0.0049125992219513775, 0.0, 0.0, -0.041199008439225776, 0.01563641296804874, -0.03997591861989098, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.0024044284679530237, 0.0, 0.0], [0.0, 0.0, -0.03228646060092589, -0.0016665415368982348, 0.0, 0.0, -0.02889363804483682, 0.0, -0.03416827369808459, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.057233559770540496, 0.0, -0.02973602789692323, -0.07194731782998735, -0.004712907184257181, 0.0, -0.025703267183119008, 0.0, -0.02702768652377624, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.020651156610964626, 0.0, -0.03370359977084872, 0.007465327830124782, 0.0, 0.0, -0.03423262271560465, 0.015197636839593442, -0.03361343505390041, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.021340248251524554, 0.0, -0.03829876168560557, 0.0, 0.0, 0.0, -0.04030054981712203, 0.0, -0.03883769553733604, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.10020205885527024, 0.0, 0.00499464062226715, -0.0778762920347465, 0.0, 0.0, 0.005113454941929753, -0.010464437910626546, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.0165115622576623, 0.0, -0.03347128136713248, -0.0028211062759431263, 0.0, 0.0, -0.034154847387648346, 0.0185875734060582, -0.035014685781330185, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.014852336432212357, 0.0, -0.022122312108212784, 0.0, 0.0, 0.0, -0.019861734977199563, -0.028221340014139423, -0.019544427126959557, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.07030528729191815, 0.0, -0.05796279578633862, 0.0, 0.0, 0.0, -0.05567284166720515, 0.0, -0.05825696024189002, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.09201823234768247, -0.003672863840862791, -0.02621122200834143, 0.0, 0.0, 0.0, -0.013764198347120032, -0.10142413497585363, -0.007133087243541052, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.00558714651710724, 0.0, 0.0, 0.0, 0.0], [0.0, -0.0022338989757615738, -0.008286678600040356, -0.046746920022953393, 0.0, 0.0, -0.009327192960213948, -0.02762120334671426, -0.010056583075017653, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.019663637432166533, 0.0, 0.05693567908966851, -0.015143203377982167, 0.0, 0.0, 0.05730975549781912, 0.03780374340778295, 0.05826289600370978, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.16203443240158072, 0.0, 0.1449569242598786, 0.03246804208740611, 0.0, 0.005435712230798362, 0.14822114074204634, 0.0, 0.1537193139627519, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.004608676728361238, 0.0, 0.0018782984717058415, 0.0, 0.0], [0.0, 0.0, -0.03694668302350695, 0.0, 0.0, 0.0, -0.038372948092673054, 0.00767134423774575, -0.03519065736284828, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.06269614558186835, 0.006109891063637005, -0.03438028802471026, 0.012824315263429718, 0.0, 0.0, -0.038908250734238294, -0.07365199288801452, -0.03982625808650361, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0063337400876136984, 0.0], [0.006296555510655857, 0.0, -0.03481227236157391, 0.04021352492428533, 0.0, 0.0, -0.031163034973544085, -0.00290539999991659, -0.03269413808990816, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.005749126478727794, -0.0019205479734781712, -0.034054662062524124, -0.005271658559082543, 0.0, 0.0, -0.03524129015408903, 0.012073932023324414, -0.03415397711584385, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [-0.016561378415358007, 0.0, -0.01570044945665433, 0.0, 0.0, 0.0, -0.015464592291115006, -0.04364731887704214, -0.013107195144945571, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.2361814577518444, 0.007736518814679516, 0.19709150125426955, 0.0233947699276017, 0.0, 0.0, 0.1948727955487214, 0.027424664890881356, 0.19166864428345298, 0.0, 0.0, 0.0, 0.0, 0.006231964615456942, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]], "perf": null, "intercept": [0.29625708826640507, 0.5991283653905717, 0.10461454634302332]}, "featureNames": ["Recency", "Frequency", "MonetaryValue", "T-Age", "RFM_Score", "Transaction", "Revenue", "avg_order_value", "cust_lifetime_value", "R_4", "R_3", "R_2", "R_1", "F_1", "F_2", "F_3", "F_4", "M_1", "M_2", "M_3", "M_4"], "classNames": ["Bronze", "Silver", "Gold"], "probabilityY": [[9.670111864858297e-06, 0.003698816758715638, 0.9962915131294195], [4.1525452688514976e-05, 0.996718715351344, 0.0032397591959673587], [0.9124785879937252, 0.07669351282503482, 0.010827899181240117], [2.4824773405339276e-14, 2.958175679867828e-14, 0.9999999999999456], [0.00013593461598479712, 0.014442409679400003, 0.9854216557046152], [0.005635873667930248, 0.08064393617804336, 0.9137201901540263], [0.9999676184810921, 3.1731619985206015e-05, 6.498989228047254e-07], [3.40092956515239e-05, 0.00808777617295186, 0.9918782145313968], [2.555585154853868e-05, 0.9974336820957443, 0.0025407620527070403], [0.0039021534291547935, 0.9878444102772029, 0.008253436293642212], [0.0002273278850031413, 0.020315597939351053, 0.9794570741756456], [0.0030962033154526875, 0.9968672075984203, 3.6589086126767297e-05], [0.0035181592568796338, 0.9888822082808426, 0.007599632462277779], [2.9289389911231998e-05, 0.997249811114588, 0.002720899495500802], [0.07469171109817084, 0.920231592040406, 0.005076696861423137], [0.003874674500745444, 0.9876075379447702, 0.008517787554484235], [0.004981949590313069, 0.8684340795925696, 0.12658397081711742], [0.9898993220946883, 0.008872041225946667, 0.0012286366793650744], [0.9998596935436223, 0.00012791077207820387, 1.239568429962651e-05], [3.754154105458242e-05, 0.9969352225194378, 0.003027235939507681], [0.013065401499811686, 0.9480944727423085, 0.0388401257578796], [0.997184053443736, 0.0024738771939420913, 0.0003420693623221389], [0.07090725776451803, 0.6489729627036266, 0.28011977953185496], [0.001165290018314556, 0.24089762275413312, 0.7579370872275525], [0.0030088977144846455, 0.9952155001837747, 0.0017756021017407786], [0.0029542274003488433, 0.9912339239935457, 0.005811848606105403], [0.015064613083136674, 0.9353856055638414, 0.04954978135302176], [0.9975524862813464, 0.002150297696051234, 0.00029721602260221816], [0.9987767662459819, 0.0010896215961098976, 0.0001336121579082548], [7.613738330606336e-05, 0.010706999186762753, 0.9892168634299312]], "predictionUrl": "http://127.0.0.1:5000/2/predict"};
+      data.divId = "app_123";
+  </script>
+  <script type="text/javascript" src="https://interpret-cdn.azureedge.net/v0.1.js"></script>
+  <style>
+      html {height: 100%;}
+      body {height: 100%; margin: 0}
+  </style><svg id="js-plotly-tester" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; left: -10000px; top: -10000px; width: 9000px; height: 9000px; z-index: 1;"><path class="js-reference-point" d="M0,0H1V1H0Z" style="stroke-width: 0; fill: black;"></path></svg></body></html>

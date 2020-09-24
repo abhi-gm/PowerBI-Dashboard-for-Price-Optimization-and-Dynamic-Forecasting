@@ -1,0 +1,25 @@
+<!doctype html>
+<title>Customer RFM tables</title>
+<link rel="stylesheet" href="static/css/meanstyle.css">
+<div class="center">
+<div class=page>
+  <h1>RFM Mean Segment</h1>
+  {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+  {% endfor %}
+</div>
+<form method="POST" action="/silver" style="display: inline-block;">
+  
+  <input type="submit" value="Silver" class="myButton">
+  </form>
+<form method="POST" action="/gold" style="display: inline-block;">
+  
+  <input type="submit" value="Gold " class="myButton">
+  </form>
+    <form method="POST" action="/bronze" style="display: inline-block;">
+    
+      <input type="submit" value="bronze" class="myButton">
+      </form>
+
+</div>
