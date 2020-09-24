@@ -33,3 +33,7 @@ Nike is dealing with a weak supply chain, they are facing an unbalanced supply a
 4.  We will also take out the effectiveness of our promotion campaign.
 5.  We implement a dynamic price optimization model which will help to give consumer seasonal and promotional offers based on current prices, demand and inventory while still remaining profitable which is something quite difficult to achieve with a flat pricing model.
 
+## **Dynamic pricing**
+
+Format: ![Alt Text](https://github.com/Abhishek-Gargha-Maheshwarappa/INFO7374DigitalMarketingAnalytics/blob/master/Project/asset/dynamic_pricing.png)
+
