@@ -81,3 +81,14 @@ We can target the group of customers who are in the 21-49 days category with a n
 > 2. 21–49: Customers that will purchase in 21–49 days — Class name: 1
 >3. ≥ 50: Customers that will purchase in more than 50 days — Class name: 0
 7.  Then used the xib classifier model we used it to predict the next purchase date class.
+
+
+
+## **References :**
+
+https://towardsdatascience.com/predicting-next-purchase-day-15fae5548027
+https://flask-table.readthedocs.io/en/stable/
+https://codepen.io/azouaoui-med/pen/wpBadb
+https://docs.aws.amazon.com/
+https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+https://flask.palletsprojects.com/en/1.1.x/deploying/wsgi-standalone/
