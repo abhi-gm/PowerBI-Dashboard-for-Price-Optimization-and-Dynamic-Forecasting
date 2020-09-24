@@ -1,4 +1,4 @@
-# **Nike - Digital Marketing**
+# **PowerBI Dashboard for Price Optimization and Dynamic Forecasting**
 
 **CLAAT LINK:**  - https://codelabs-preview.appspot.com/?file_id=1G-kaFuvlpAOPTi676TQcSdJN6E11AXYdgCR-dbLP6uo#0
 
