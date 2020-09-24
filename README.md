@@ -37,3 +37,22 @@ Nike is dealing with a weak supply chain, they are facing an unbalanced supply a
 
 Format: ![Alt Text](https://github.com/Abhishek-Gargha-Maheshwarappa/PowerBI-Dashboard-for-Price-Optimization-and-Dynamic-Forecasting/blob/master/asset/dynamic_pricing.png)
 
+
+## **Demand Forecasting**
+
+The following driving factors for demand are considered in our demand forecasting model:
+
+### **Price-related features such as:**
+
+1.  The actual sales price and cost
+2.  The discount of the price compared to MSRP (manufacturer's suggested retail price) or original price in other industries, and the relative price, the ratio between a product's price and the average price of all products in the same competing group.
+3.  Product attributes such as the brand desirability and department information.
+4.  Store attributes such as average traffic in the store, etc.
+
+A demand forecasting model is built on the features mentioned above. The model's performance is evaluated through mean absolute percentage error (MAPE). The model is retrained monthly, since continuously-acquired transaction data can be used to improve the demand forecasting accuracy and, consequently, the price optimization results.
+
+### **Price Optimization**
+
+During price optimization, each product's price is constrained to a feasible range bounded by the wholesale cost and manufacturer's suggested retail price (MSRP)/original price. Companies may elect to tailor these constraints to their own business rules to reflect the differentiated pricing strategies they prefer for specific brands, departments, or stores.
+
+An experiment is employed to evaluate the effect of price optimization strategy on profit. Stores are paired based on similarity and then divided into "treatment" and "control" groups. Stores in the treatment group accept the prices recommended by the optimization algorithm, whereas stores in the control group use the company's previous pricing strategy (which, in this demo scenario, is a randomized pricing strategy). The profit gain of the optimization approach can be estimated from the difference in profit between the treatment and control groups.
