@@ -35,5 +35,5 @@ Nike is dealing with a weak supply chain, they are facing an unbalanced supply a
 
 ## **Dynamic pricing**
 
-Format: ![Alt Text](https://github.com/Abhishek-Gargha-Maheshwarappa/INFO7374DigitalMarketingAnalytics/blob/master/Project/asset/dynamic_pricing.png)
+Format: ![Alt Text](https://github.com/Abhishek-Gargha-Maheshwarappa/PowerBI-Dashboard-for-Price-Optimization-and-Dynamic-Forecasting/blob/master/asset/dynamic_pricing.png)
 
